@@ -1,51 +1,108 @@
 <!doctype html>
+<!-- 金色星空设计系统（D:\[[☑]] FX store\项目\金色星空海报\）的网页版：星空做信头与信尾，正文落在象牙白纸面，墨蓝衬线字；
+     浅底上不用渐层金字，重点字用深金 #9a6b2c。正文由 build.py 加密注入 -->
 <html lang="zh-Hans">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>工作线记忆框架</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@400;600;900&family=Cinzel:wght@500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f4ee;--fg:#22201c;--muted:#78716a;--line:#ddd5c8;--accent:#9a3b26;--card:#fffdf9}
-@media (prefers-color-scheme:dark){:root{--bg:#171513;--fg:#e9e4dc;--muted:#9a928a;--line:#3a352f;--accent:#e08b6f;--card:#201d1a}}
-*{box-sizing:border-box}
+:root{--navy:#060b1d;--ink:#1b2440;--muted:#5d6580;--paper:#fbf7ee;--paper-2:#f4ecdb;--gold-hi:#fbe7b5;--gold:#e7c27a;--gold-lo:#b8853f;--gold-ink:#9a6b2c;--gold-line:#d8b06a;--warm:#f3ecdf;
+  --serif:'Noto Serif SC','Songti SC','Source Han Serif SC',STSong,serif;--sans:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.9 "PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif}
-main{max-width:720px;margin:0 auto;padding:56px 20px 80px}
-h1,h2{font-family:"Songti SC","Noto Serif CJK SC","Source Han Serif SC",STSong,SimSun,serif;font-weight:700;letter-spacing:.04em}
-h1{font-size:30px;line-height:1.4;margin:0 0 6px}
-h1+p{color:var(--muted);margin:0 0 48px;padding-bottom:28px;border-bottom:1px solid var(--line)}
-h2{font-size:21px;margin:52px 0 14px;padding-left:12px;border-left:3px solid var(--accent)}
-p,li{text-align:justify}
-ul,ol{padding-left:1.4em}
-li{margin:4px 0}
-strong{color:var(--accent);font-weight:600}
-code{font-size:.9em;background:var(--card);border:1px solid var(--line);padding:0 4px;border-radius:3px}
-.table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:6px;background:var(--card)}
-table{border-collapse:collapse;font-size:14.5px;line-height:1.65;min-width:100%}
-th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
-th{background:var(--bg);white-space:nowrap}
-td:first-child{min-width:5.5em;color:var(--muted)}
-@media (min-width:800px){.swipe{display:none}}
+body{background:var(--navy) url(assets/bg.webp) center top/cover fixed;color:var(--ink);font-family:var(--serif);min-height:100vh}
+.g{background:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 45%,var(--gold-lo) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gold-rule{height:3px;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi) 50%,var(--gold-lo))}
+
+/* ── 邀请码门 ── */
+#gate{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;overflow:hidden}
+#gate::before{content:"";position:absolute;inset:0;background:url(assets/fx.webp) center/cover;opacity:.7;pointer-events:none}
+#gate .ridge{position:absolute;right:-120px;bottom:-40px;width:min(720px,110vw);opacity:.95;filter:drop-shadow(0 0 22px rgba(255,200,120,.3));-webkit-mask-image:linear-gradient(90deg,transparent 10%,#000 45%);mask-image:linear-gradient(90deg,transparent 10%,#000 45%);pointer-events:none}
+#gate form{position:relative;z-index:1;width:100%;max-width:360px;text-align:center}
+.kicker{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.42em;color:var(--gold)}
+#gate h1{white-space:nowrap;font-family:var(--serif);font-weight:900;font-size:clamp(34px,9vw,46px);letter-spacing:.12em;line-height:1.3;margin:14px 0 10px}
+#gate p{font-family:var(--sans);color:var(--warm);font-size:14px;letter-spacing:.2em}
+#gate input{width:100%;font:500 17px var(--sans);padding:12px 14px;margin:30px 0 12px;border:1px solid var(--gold-line);border-radius:2px;background:rgba(6,11,29,.55);color:var(--gold-hi);text-align:center;letter-spacing:.18em;outline:none}
+#gate input:focus{box-shadow:0 0 0 3px rgba(216,176,106,.25)}
+#gate input::placeholder{color:rgba(243,236,223,.35)}
+#gate button{width:100%;font:700 16px var(--sans);letter-spacing:.5em;padding:12px 0 12px .5em;border:0;border-radius:2px;color:var(--navy);background:linear-gradient(180deg,var(--gold-hi),var(--gold) 50%,var(--gold-lo));cursor:pointer}
+#err{font-family:var(--sans);color:var(--gold);min-height:1.8em;margin-top:10px;font-size:14px}
+
+/* ── 正文页：信头＋纸面＋信尾 ── */
+#doc{max-width:880px;margin:0 auto;padding:0 0 0;box-shadow:0 0 60px rgba(0,0,0,.5)}
+.head{position:relative;overflow:hidden;background:var(--navy) url(assets/bg.webp) center 30%/cover;padding:64px 64px 52px;min-height:340px}
+.head::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,11,29,.65),rgba(6,11,29,0) 75%);pointer-events:none}
+.head .ridge{position:absolute;right:-170px;top:0;width:620px;filter:drop-shadow(0 0 20px rgba(255,200,120,.3));-webkit-mask-image:linear-gradient(90deg,transparent 18%,#000 48%);mask-image:linear-gradient(90deg,transparent 18%,#000 48%)}
+.head>*:not(.ridge){position:relative;z-index:1}
+.head h1{font-weight:900;font-size:clamp(38px,7.4vw,64px);line-height:1.2;letter-spacing:.14em;margin:18px 0 18px}
+.head .sub{font-family:var(--sans);font-weight:500;font-size:16px;letter-spacing:.14em;color:var(--warm)}
+.head .by{font-family:var(--sans);font-size:14px;letter-spacing:.2em;color:var(--gold);margin-top:22px}
+.body{background:var(--paper);padding:56px 72px 64px;font-size:17.5px;line-height:1.95}
+.body h2{font-weight:900;font-size:23px;letter-spacing:.08em;margin:58px 0 20px;padding-bottom:12px;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi) 40%,transparent 70%) left bottom/100% 2px no-repeat}
+.body h2:first-child{margin-top:0}
+.body p{margin:0 0 16px;text-align:justify}
+.body ul,.body ol{margin:0 0 16px;padding-left:1.5em}
+.body li{margin:6px 0;text-align:justify}
+.body li::marker{color:var(--gold-lo)}
+.body strong{color:var(--gold-ink);font-weight:700}
+.body code{font-family:ui-monospace,Consolas,monospace;font-size:.86em;background:var(--paper-2);padding:1px 5px;border-radius:2px}
+.note{font-family:var(--sans);font-size:13px;color:var(--muted)}
+
+/* 表格 */
+.table-wrap{margin:22px 0 22px;border-top:2px solid var(--gold-line);border-bottom:2px solid var(--gold-line)}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14.5px;line-height:1.7}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid #e6dcc8}
+thead th{font-weight:700;color:var(--ink);background:var(--paper-2);font-size:14px}
+th small{display:block;font-weight:400;font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px}
+td:first-child{font-weight:700;color:var(--gold-ink);white-space:nowrap}
 tr:last-child td{border-bottom:0}
-table strong{color:inherit}
-.table-wrap:has(th:nth-child(5)) table{min-width:760px}
-.note{font-size:13px;color:var(--muted)}
-footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-#gate form{width:100%;max-width:340px;text-align:center}
-#gate h1{font-size:24px}
-#gate p{color:var(--muted);font-size:14px;text-align:center}
-#gate input{width:100%;font:inherit;padding:10px 12px;margin:18px 0 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);text-align:center;letter-spacing:.1em}
-#gate button{width:100%;font:inherit;padding:10px;border:0;border-radius:6px;background:var(--accent);color:#fff;cursor:pointer}
-#err{color:var(--accent);min-height:1.6em;font-size:14px}
+.cmp th:nth-child(2),.cmp td:nth-child(2){background:linear-gradient(180deg,rgba(216,176,106,.20),rgba(216,176,106,.10));color:var(--ink);font-weight:700}
+.cmp thead th:nth-child(2){background:var(--navy);color:var(--gold-hi);border-bottom-color:var(--navy)}
+.cmp td:not(:first-child):not(:nth-child(2)){color:var(--muted)}
+.plain td:first-child{width:6.5em}
+
+/* 落款 */
+.sign{width:fit-content;margin:64px 0 0 auto;text-align:left;font-weight:600;font-size:18px;line-height:2}
+.sign span{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.2em;color:var(--gold-ink);margin-right:14px}
+.sign .date{font-weight:400;font-size:16px;color:var(--muted)}
+.foot{background:var(--navy) url(assets/bg.webp) center 85%/cover;padding:30px 24px 34px;text-align:center}
+.foot .en{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.3em;margin-bottom:6px}
+.foot .zh{font-family:var(--sans);font-size:12.5px;letter-spacing:.12em;color:rgba(243,236,223,.75)}
+
+/* 手机：比较表转卡片，自家在每张卡最上面 */
+@media (max-width:720px){
+  .head{padding:44px 20px 36px;min-height:300px}
+  .head .ridge{width:420px;right:-190px;opacity:.85}
+  .head .sub{font-size:14px;letter-spacing:.08em}
+  .body{padding:40px 20px 48px;font-size:16.5px}
+  .body h2{font-size:20px;margin-top:46px}
+  .cmp{border:0}
+  .cmp thead{display:none}
+  .cmp table,.cmp tbody,.cmp tr,.cmp td{display:block;width:100%}
+  .cmp tr{margin:0 0 16px;border:1px solid #e6dcc8;border-top:2px solid var(--gold-line);background:#fffdf8}
+  .cmp td{border:0;padding:6px 14px;white-space:normal}
+  .cmp td:first-child{font-size:15px;padding:10px 14px 4px;letter-spacing:.1em}
+  .cmp td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;color:var(--muted);font-weight:500}
+  .cmp td:nth-child(2){background:rgba(216,176,106,.16);margin:2px 0 6px}
+  .cmp td:nth-child(2)::before{color:var(--gold-ink);font-weight:700}
+  .cmp td:last-child{padding-bottom:12px}
+  .plain td:first-child{width:auto;padding-right:6px}
+  table{font-size:14px}
+  .sign{font-size:17px}
+}
 </style>
 </head>
 <body>
 <div id="gate">
+  <img class="ridge" src="assets/ridge.webp" alt="">
   <form id="f">
-    <h1>工作线记忆框架</h1>
-    <p>邀请制浏览，请输入邀请码</p>
+    <div class="kicker">HARNESS · CORE</div>
+    <h1 class="g">工作线记忆框架</h1>
+    <p>邀请制浏览　·　请输入邀请码</p>
     <input id="c" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="xxxx-xxxx-xxxx" aria-label="邀请码">
     <button>进入</button>
     <div id="err" role="alert"></div>
@@ -55,20 +112,21 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-si
 <script>
 const P="__PAYLOAD__",N=__ITER__;
 const b=Uint8Array.from(atob(P),c=>c.charCodeAt(0));
-async function open(code){
+async function unlock(code){
   const e=new TextEncoder(),k0=await crypto.subtle.importKey("raw",e.encode(code),"PBKDF2",false,["deriveKey"]);
   const k=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b.slice(0,16),iterations:N,hash:"SHA-256"},k0,{name:"AES-GCM",length:256},false,["decrypt"]);
   const t=await crypto.subtle.decrypt({name:"AES-GCM",iv:b.slice(16,28)},k,b.slice(28));
   const m=document.getElementById("doc");
-  m.innerHTML=new TextDecoder().decode(t)+'<footer>© 2026 林子策・邀请制浏览，请勿转发邀请码</footer>';
+  m.innerHTML=new TextDecoder().decode(t)+'<div class="gold-rule"></div><footer class="foot"><div class="en g">HARNESS · CORE</div><div class="zh">© 2026 林子策　·　邀请制浏览，请勿转发邀请码</div></footer>';
   document.getElementById("gate").remove();m.hidden=false;
   try{sessionStorage.setItem("ic",code)}catch(_){}
 }
 async function tryCode(code,quiet){
   code=code.trim().toLowerCase();if(!code)return;
-  try{await open(code)}catch(_){if(!quiet)document.getElementById("err").textContent="邀请码不正确"}
+  const r=document.getElementById("err");if(!quiet)r.textContent="验证中…";
+  try{await unlock(code)}catch(_){if(!quiet)r.textContent="邀请码不正确"}
 }
-document.getElementById("f").onsubmit=ev=>{ev.preventDefault();document.getElementById("err").textContent="验证中…";tryCode(document.getElementById("c").value).then(()=>{const r=document.getElementById("err");if(r&&r.textContent==="验证中…")r.textContent=""})};
+document.getElementById("f").onsubmit=ev=>{ev.preventDefault();tryCode(document.getElementById("c").value)};
 let s=location.hash.slice(1);try{s=s||sessionStorage.getItem("ic")||""}catch(_){}
 if(s)tryCode(decodeURIComponent(s),true);
 </script>

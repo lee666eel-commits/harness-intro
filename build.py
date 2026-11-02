@@ -19,7 +19,7 @@ def key(code: str, salt: bytes) -> bytes:
 def shape(body: str) -> str:
     """h1＋副标＋署名 → 星空信头；表格每格加 data-label（手机上转成卡片用）。"""
     m = re.match(r"\s*<h1>(.*?)</h1>\s*<p>(.*?)</p>", body, re.S)
-    head = (f'<header class="head"><img class="ridge" src="assets/ridge.webp" alt="">'
+    head = (f'<header class="head">'
             f'<div class="kicker">HARNESS · CORE</div><h1 class="g">{m[1]}</h1>'
             f'<p class="sub">{m[2]}</p><p class="by">林子策 主理　·　飞鑫 撰文</p></header>'
             f'<div class="gold-rule"></div><article class="body">')
